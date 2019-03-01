@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- 输出信息到控制台,用于开发调试 -->
+    <appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] (%F:%L) - %m%n"/>
+        </layout>
+        <!-- 日志过滤条件,输出哪些日志 -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <!-- OFF FATAL ERROR WARN INFO DEBUG TRACE ALL -->
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+
+    <!-- 输出信息到文件,每天产生一个日志文件 -->
+    <appender name="myFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/log4j.log"/>
+        <param name="Append" value="true"/>
+        <!-- 日志输出的最低等级 -->
+        <param name="Threshold" value="info"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] (%F:%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 日志记录器,子logger会默认继承父logger的appender;子logger只在自己未定义输出级别的情况下，才会继承父logger的输出级别 -->
+    <logger name="com.learn.spring.server" additivity="false">
+        <!-- Logger中定义的level和appender中的filter定义的level的区间取交集 -->
+        <level value="debug"/>
+        <!-- 默认作用于所有的appender -->
+        <appender-ref ref="myConsole"/>
+        <appender-ref ref="myFile"/>
+    </logger>
+
+    <root>
+        <level value="ALL"/>
+        <appender-ref ref="myConsole"/>
+    </root>
+</log4j:configuration>

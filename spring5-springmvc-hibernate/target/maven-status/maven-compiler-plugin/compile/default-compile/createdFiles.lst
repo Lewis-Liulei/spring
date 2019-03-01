@@ -1,0 +1,11 @@
+liulei\controller\TestController.class
+liulei\core\common\util\DataUtils.class
+liulei\core\common\ResultMsg.class
+liulei\core\common\jdbc\datasource\DynamicDataSource.class
+liulei\controller\pojo\Person.class
+liulei\core\common\util\StringUtils.class
+liulei\core\common\util\GenericsUtils.class
+liulei\core\common\Page.class
+liulei\core\common\util\ObjectUtils.class
+liulei\core\common\jdbc\datasource\DynamicDataSourceEntry.class
+liulei\core\common\util\BeanUtils.class
